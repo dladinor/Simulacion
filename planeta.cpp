@@ -34,14 +34,14 @@ void Cuerpo::Muevase(double dt){
 
 int main(){
     Cuerpo Planeta;
-    double r=10, omega, V0;
-    double t,dt=0.1;
+    double r=100, omega, V0;
+    double t,dt=0.01;
 
     omega = sqrt(GM/(r*r*r));
     V0 = omega*r;
     //-------------x0,y0,Vx0,Vy0,m0,R0) unidades vel m/s
-    Planeta.Inicie(r,0,0,V0,5,0.15);
-    for(t=0;t<0.1*2*M_PI/omega;t+=dt){
+    Planeta.Inicie(r,0,0,V0,1,0.15);
+    for(t=0;t<1.1*2*M_PI/omega;t+=dt){
         cout<<Planeta.Getx()<<" "<<Planeta.Gety()<<endl;
         Planeta.CalculeFuerza();
         Planeta.Muevase(dt);
