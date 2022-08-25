@@ -3,7 +3,7 @@
 using namespace std;
 
 double f(double t,double x){
-    return x/2;
+    return t;
 }
 
 void UnPasoDeEuler(double & t, double & x, double dt){
@@ -13,8 +13,8 @@ void UnPasoDeEuler(double & t, double & x, double dt){
 }
 
 int main(){
-    double t,x; double dt=0.1;
-    for(t=0,x=0; x<2;){
+    double t,x; double dt=0.01;
+    for(t=0,x=0; t<2;){
         cout<<t<<" "<<x<<" "<<x*x/2<<endl;
         UnPasoDeEuler(t,x,dt);
     }
