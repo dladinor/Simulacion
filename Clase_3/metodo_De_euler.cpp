@@ -15,7 +15,7 @@ void UnPasoDeEuler(double & t, double & x, double dt){
 int main(){
     double t,x; double dt=0.01;
     for(t=0,x=0; t<2;){
-        cout<<t<<" "<<x<<" "<<x*x/2<<endl;
+        cout<<t<<" "<<x<<" "<<t*t/2<<endl;
         UnPasoDeEuler(t,x,dt);
     }
 
