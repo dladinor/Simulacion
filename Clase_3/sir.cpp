@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cmath>
-const double Beta = 0.3;
+const double Beta = 0.35;
 
-const double Gamma = 0.1;
+const double Gamma = 0.08;
 
 double f1(double t, double s, double i){
     return (-1)*Beta*s*i;
@@ -33,7 +33,7 @@ void RK4_Step(double & t0, double & s0, double & i0, double dt){
 int main(){
     double t, s, i,r , dt = 0.01;
 
-    for(t=0, s=1, i=0.1 ; t <= 50 ; ){
+    for(t=0, s=0.999, i=0.001 ; t <= 90; ){
         r=1-s-i;
         std::cout << t << "\t" << s << "\t" << i << "\t" << r << "\t" << s+r+i <<std::endl;
         RK4_Step(t, s, i, dt);
