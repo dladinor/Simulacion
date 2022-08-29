@@ -27,7 +27,7 @@ void RK4_Step(double & r0, double & R10, double & R20, double dr){
 
 int main (){
     double r, R1, R2, dr=0.01;
-    for(R2=1, R1=0, r=0.01; r<=10.0;){
+    for(R2=1, R1=0, r=0.01; r<10.0;){
     cout<<r<<"\t"<<R1<<"\t"<<R2<<endl;
     RK4_Step(r, R1, R2, dr);
     }  
