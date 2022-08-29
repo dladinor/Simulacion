@@ -7,6 +7,8 @@ double f(double t, double x){
     return x;
 }
 
+// deltax=(deltax1+2*deltax2+2*deltax3+deltax4)/4
+
 void RK4_Step(double & t0, double & x0, double dt){
     double dx1, dx2, dx3, dx4;
     dx1 = dt * f(t0,x0);
