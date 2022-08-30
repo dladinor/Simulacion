@@ -2,35 +2,35 @@
 #include <cmath>
 using namespace std;
 
-const double Lambda=1;
+const double r=1;
 
-double f1(double r, double R1, double R2){
+double f1(double Lambda, double R1, double R2){
     return (-R1/r) - Lambda*Lambda*R2;
 }
 
-double f2(double r, double R1, double R2){
+double f2(double Lambda, double R1, double R2){
     return R1;
 }
 
-void RK4_Step(double & r0, double & R10, double & R20, double dr){
+void RK4_Step(double & Lambda0, double & R10, double & R20, double dLambda){
     double dR11, dR21, dR31, dR41;
     double dR12, dR22, dR32, dR42;
-    dR11 = dr * f1(r0,R10,R20);                                      dR12 = dr * f2(r0,R10,R20);
-    dR21 = dr * f1(r0+dr/2, R10+dR11/2, R20+dR12/2);                 dR22 = dr * f2(r0+dr/2, R10+dR11/2, R20+dR12/2);
-    dR31 = dr * f1(r0+dr/2, R10+dR21/2, R20+dR22/2);                 dR32 = dr * f2(r0+dr/2, R10+dR21/2, R20+dR22/2);
-    dR41 = dr * f1(r0+dr, R10+dR31, R20+dR32);                       dR42 = dr * f2(r0+dr, R10+dR31, R20+dR32);
+    dR11 = dLambda * f1(Lambda0,R10,R20);                                           dR12 = dLambda * f2(Lambda0,R10,R20);
+    dR21 = dLambda * f1(Lambda0+dLambda/2, R10+dR11/2, R20+dR12/2);                 dR22 = dLambda * f2(Lambda0+dLambda/2, R10+dR11/2, R20+dR12/2);
+    dR31 = dLambda * f1(Lambda0+dLambda/2, R10+dR21/2, R20+dR22/2);                 dR32 = dLambda * f2(Lambda0+dLambda/2, R10+dR21/2, R20+dR22/2);
+    dR41 = dLambda * f1(Lambda0+dLambda, R10+dR31, R20+dR32);                       dR42 = dLambda * f2(Lambda0+dLambda, R10+dR31, R20+dR32);
     
-    r0+= dr;
+    Lambda0+= dLambda;
     R10 += (dR11 + 2*dR21 + 2*dR31 + dR41)/6 ; 
     R20 += (dR12 + 2*dR22 + 2*dR32 + dR42)/6 ;
     
 }
 
 int main (){
-    double r, R1, R2, dr=0.01;
-    for(R2=1, R1=0, r=0.01; r<10.0;){
-    cout<<r<<"\t"<<R2<<endl;
-    RK4_Step(r, R1, R2, dr);
+    double Lambda, R1, R2, dLambda=0.01;
+    for(R2=1, R1=0, Lambda=0.1; Lambda<=15.0;){
+    cout<<Lambda<<"\t"<<R2<<endl;
+    RK4_Step(Lambda, R1, R2, dLambda);
     }  
 }
 
