@@ -48,7 +48,7 @@ int main(){
   Cuerpo Planeta;
   double r0=10,m0=1;
   double omega,V0,T;
-  double t,dt=10;
+  double t,dt=0.1;
 
   omega=sqrt(GM/(r0*r0*r0)); V0=omega*r0; T=2*M_PI/omega;
   
