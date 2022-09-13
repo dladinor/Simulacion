@@ -1,0 +1,2 @@
+plot "datos_dos_planetas.dat" w l
+pause 3
