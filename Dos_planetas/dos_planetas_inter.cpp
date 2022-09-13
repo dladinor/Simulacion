@@ -57,6 +57,7 @@ class Colisionador{
     void CalculeFuerzas(Cuerpo * Planeta);
     void CalculeFuerzaEntre(Cuerpo & Planeta1, Cuerpo & Planeta2);
 };
+
 void Colisionador::CalculeFuerzas(Cuerpo * Planeta){
   int i, j;
   //Borrar fuerzas;
