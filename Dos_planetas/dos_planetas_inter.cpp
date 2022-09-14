@@ -84,8 +84,8 @@ void Colisionador::CalculeFuerzaEntre(Cuerpo & Planeta1, Cuerpo & Planeta2){
 }
 //----------- Funciones Globales -----------
 void InicieAnimacion(void){
-  cout<<"set terminal gif animate"<<endl; 
-  cout<<"set output 'Dos_planetas.gif'"<<endl;
+  // cout<<"set terminal gif animate"<<endl; 
+  // cout<<"set output 'Dos_planetas.gif'"<<endl;
   cout<<"unset key"<<endl;
   cout<<"set xrange[-12:12]"<<endl;
   cout<<"set yrange[-12:12]"<<endl;
@@ -112,14 +112,14 @@ int main(){
   omega= sqrt(G*M*pow(r,-3.0)); 
   T = 2*M_PI/omega;
   V0=omega*x0, V1=omega*x1;
-  double t,tmax=10*T,dt=0.01; 
+  double t,tmax=10*T,dt=0.0001; 
   double tdibujo, tcuadro=T/500;
   
   //omega=sqrt(G/(r0*r0*r0)); V0=omega*r0; T=2*M_PI/omega;
   
   //------------(x0,y0,z0,Vx0,Vy0,Vz0,m0,R0)
-  Planeta[0].Inicie(x0,0,0,0,V0,0,m0,0.5);
-  Planeta[1].Inicie(x1,0,0,0,V1,0,m1,0.5);
+  Planeta[0].Inicie(x0,0,0,0,0.5*V0,0,m0,0.5);
+  Planeta[1].Inicie(x1,0,0,0,0.5*V1,0,m1,0.5);
 
   InicieAnimacion();
 
