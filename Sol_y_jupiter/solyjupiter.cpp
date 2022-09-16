@@ -43,16 +43,12 @@ void Cuerpo::BorreFuerza(void){
 void Cuerpo::SumeFuerza(vector3D F0){
   F+=F0;
 }
-
 void Cuerpo::Mueva_r(double dt, double coeficiente){
    r+=V*(dt*coeficiente);
-  
 }
 void Cuerpo::Mueva_V(double dt, double coeficiente){
    V+=F*(dt*coeficiente/m);
-  
 }
-
 void Cuerpo::Dibujese(void){
   cout<<" , "<<r.x()<<"+"<<R<<"*cos(t),"<<r.y()<<"+"<<R<<"*sin(t)";
 }
