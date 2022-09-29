@@ -47,6 +47,7 @@ void Cuerpo::Mueva_omega(double dt, double coeficiente){
 }
 void Cuerpo::Dibujese(void){
   cout<<" , "<<Getx()<<"+"<<R<<"*cos(t),"<<Gety()<<"+"<<R<<"*sin(t)";
+  cout<<" , "<<x0<<"+"<<l/7<<"*t*sin("<<theta<<"),-"<<l/7<<"*t*cos("<<theta<<"),";
 }
 //-------Clase colisionador----------
 class Colisionador{
