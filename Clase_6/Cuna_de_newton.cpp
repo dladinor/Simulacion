@@ -5,7 +5,8 @@ using namespace std;
 
 //Constantes globales
 const double g=980; //unidades cgs
-const int N=1;
+const int N=5;
+const double K=1e9;
 
 //constantes de PERFL;
 const double Zeta=0.1786178958448091e00;
@@ -47,7 +48,7 @@ void Cuerpo::Mueva_omega(double dt, double coeficiente){
 }
 void Cuerpo::Dibujese(void){
   cout<<" , "<<Getx()<<"+"<<R<<"*cos(t),"<<Gety()<<"+"<<R<<"*sin(t)";
-  cout<<" , "<<x0<<"+"<<l/7<<"*t*sin("<<theta<<"),-"<<l/7<<"*t*cos("<<theta<<"),";
+  cout<<" , "<<x0<<"+"<<l/7<<"*t*sin("<<theta<<"),-"<<l/7<<"*t*cos("<<theta<<")";
 }
 //-------Clase colisionador----------
 class Colisionador{
@@ -66,19 +67,22 @@ void Colisionador::CalculeTorques(Cuerpo * Pendulo){
     Pendulo[i].SumeTorque(tau0);
     }
   //Calcular las torques entre todas las parejas del Pendulo
-//   for(i=0; i<N; i++)
-//     for (j=i+1; j<N; j++)
-//       CalculeTorqueEntre(Pendulo[i], Pendulo[j]);
-// }
-// void Colisionador::CalculeTorqueEntre(Cuerpo & Pendulo1, Cuerpo & Pendulo2){
-// }
-//----------- Funciones Globales -----------
+  for(i=N-1; i>0; i--)
+      CalculeTorquesEntre(Pendulo[i], Pendulo[i-1]);
 }
+void Colisionador::CalculeTorquesEntre(Cuerpo & Pendulo1, Cuerpo & Pendulo2){
+double s= (Pendulo2.Getx()+Pendulo2.R)-(Pendulo1.Getx()-Pendulo1.R); double F=0;
+if (s>0) F=K*pow(s,1.5);//FUerza de hertz
+Pendulo1.SumeTorque(F*Pendulo1.l);
+Pendulo2.SumeTorque(-F*Pendulo2.l);
+}
+//----------- Funciones Globales -----------
+
 void InicieAnimacion(void){
   // cout<<"set terminal gif animate"<<endl; 
   // cout<<"set output 'Dos_Pendulos.gif'"<<endl;
   cout<<"unset key"<<endl;
-  cout<<"set xrange[-10:15]"<<endl;
+  cout<<"set xrange[-5:20]"<<endl;
   cout<<"set yrange[-18:7]"<<endl;
   cout<<"set size ratio -2"<<endl;
   cout<<"set parametric"<<endl;
@@ -92,9 +96,9 @@ void TermineCuadro(void){
     cout<<endl;
 }
 int main(){
-  int ii;
-  double m=50, l0=12, R=2, x00= 5;
-  double theta0=M_PI/4, omega0=0, T=2*M_PI*sqrt(l0/g);
+  int ii,j;
+  double m0=50, l0=12, R0=2, x00= 0;
+  double theta0=-0.2, omega0=0, T=2*M_PI*sqrt(l0/g);
 
   Cuerpo Pendulo[N];
   Colisionador Newton;
@@ -104,8 +108,10 @@ int main(){
   //omega=sqrt(G/(r0*r0*r0)); V0=omega*r0; T=2*M_PI/omega;
   
   //------------(double theta0, double omega0, double m0, double R0, double l0, double x00)
-  Pendulo[0].Inicie(theta0,omega0,m,R,l0,x00);
-  //Pendulo[1].Inicie(x1,0,0,0,V1,0,m1,0.5);
+  Pendulo[0].Inicie(-0.4,omega0,m0,R0,l0,x00);
+  Pendulo[1].Inicie(-0.4,omega0,m0,R0,l0,2*R0);
+  for(ii=2;ii<N;ii++)
+    Pendulo[ii].Inicie(0,0,m0,R0,l0,2*R0*ii);
 
   InicieAnimacion();
 
@@ -117,7 +123,7 @@ int main(){
       TermineCuadro();
       tdibujo=0;
     }
-    cout<<Pendulo[1].Getx()<<"\t"<<Pendulo[1].Gety()<<endl;
+    //cout<<Pendulo[1].Getx()<<"\t"<<Pendulo[1].Gety()<<endl;
     for(ii=0;ii<N;ii++) {Pendulo[ii].Mueva_theta(dt,Zeta);}
     Newton.CalculeTorques(Pendulo);
     for(ii=0;ii<N;ii++){ Pendulo[ii].Mueva_omega(dt,Coeficiente1);}
